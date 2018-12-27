@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-copy-assets",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "description": "Copy additional assets into the output directory of your rollup bundle.",
   "main": "dist/rollup-plugin-copy-assets.js",
   "module": "dist/rollup-plugin-copy-assets.module.js",
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bengsfort/rollup-plugin-copy-assets"
+    "url": "git+https://github.com/brunocabezas/rollup-plugin-copy-assets"
   },
   "keywords": [
     "rollup-plugin",
@@ -33,9 +33,9 @@
   "author": "Matt Bengston <bengston.matthew@gmail.com> (https://bengsfort.github.io)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bengsfort/rollup-plugin-copy-assets/issues"
+    "url": "https://github.com/brunocabezas/rollup-plugin-copy-assets/issues"
   },
-  "homepage": "https://github.com/bengsfort/rollup-plugin-copy-assets#readme",
+  "homepage": "https://github.com/brunocabezas/rollup-plugin-copy-assets#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
