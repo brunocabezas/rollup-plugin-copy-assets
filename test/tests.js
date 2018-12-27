@@ -37,6 +37,35 @@ describe('rollup-plugin-copy-assets', function() {
       assertExists('output/assets/bar.csv'),
     ]))
     .then(() => done());
+
+  it('should copy assets to outputDir as base folder when present', function(done) {
+    build({
+      assets: ['fixtures/assets', 'fixtures/top-level-item.txt'],
+      outputDir: 'testDir',
+    })
+      .then(() =>
+        Promise.all([
+          // assertExists('output/testDir'),
+          assertExists('output/testDir/foo.txt'),
+          assertExists('output/testDir/bar.csv'),
+          assertExists('output/testDir/top-level-item.txt'),
+        ])
+      )
+      .then(() => done());
+  });
+
+  it('should be compatible with array of string as input on rollup config', function(done) {
+    buildWithMultipleInput({
+      assets: ['fixtures/assets', 'fixtures/top-level-item.txt'],
+      outputDir: 'testDir',
+    })
+      .then(() =>
+        Promise.all([
+          assertExists('output/index.js'),
+          assertExists('output/index2.js'),
+        ])
+      )
+      .then(() => done());
   });
 });
 
@@ -44,14 +73,25 @@ describe('rollup-plugin-copy-assets', function() {
 function build(config) {
   return rollup({
     input: './fixtures/index.js',
-    plugins: [
-      copy(config),
-    ],
-  }).then(bundle => bundle.write({
-    file: 'output/bundle.js',
-    format: 'iife',
-    name: 'test',
-  }));
+    plugins: [copy(config)],
+  }).then((bundle) =>
+    bundle.write({
+      file: 'output/bundle.js',
+      format: 'iife',
+      name: 'test',
+    })
+  );
+}
+
+// Run the rollup build with an plugin configuration compatible with multiple inputs.
+function buildWithMultipleInput(config) {
+  return rollup({
+    input: ['./fixtures/index.js', './fixtures/index2.js'],
+    plugins: [copy(config)],
+    experimentalCodeSplitting: true,
+  }).then((bundle) =>
+    bundle.write({ dir: 'output/', format: 'es', name: 'test' })
+  );
 }
 
 // Asserts that a file does or does not exist.

@@ -53,6 +53,7 @@ dist/
 ### Options
 
 - `assets`: **(required)** An array of paths to copy. Accepts files as well as directories.
+- `outputDir`: A string that represents a directory. All assets files will be here instead of using each file path.
 
 ## License
 
